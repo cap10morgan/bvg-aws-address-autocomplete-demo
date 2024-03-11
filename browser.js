@@ -30,8 +30,8 @@ const getAddressAutocompleteSuggestions = async (text) => {
   var results = [];
   try {
     const resp = await locationClient.send(command);
-    console.log("Response:");
-    console.dir(resp);
+    // console.log("Response:");
+    // console.dir(resp);
     results = resp["Results"].map((place) => place["Text"]);
   } catch (error) {
     console.error(`Error: ${error}`);
