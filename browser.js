@@ -17,9 +17,6 @@ const locationClient = new LocationClient({
 });
 
 const getAddressAutocompleteSuggestions = async (text) => {
-  if (text === '') {
-    return [];
-  }
   const params = {
     IndexName: "bvg-addr-autocomplete-demo",
     FilterCountries: ["USA"],

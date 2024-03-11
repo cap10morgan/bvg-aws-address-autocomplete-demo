@@ -19,7 +19,7 @@
             const loadSuggestions = (element) => {
                 // console.log("loading suggestions...");
                 const text = element.value;
-                if (text === '') {
+                if (text.length < 4) {
                     suggestionList.replaceChildren();
                     return;
                 }
