@@ -26,13 +26,15 @@
                 getAddressAutocompleteSuggestions(text).then((suggestions) => {
                     // console.log("Suggestions:");
                     // console.dir(suggestions);
+                    var options = [];
                     if (suggestions && suggestions.length > 0) {
-                        suggestions.forEach((suggestion) => {
+                        options = suggestions.map((suggestion) => {
                             const option = document.createElement("option");
                             option.value = suggestion;
-                            suggestionList.appendChild(option);
+                            return option;
                         });
                     }
+                    suggestionList.replaceChildren(...options);
                 });
             };
             const addrField = document.getElementById("addr");
