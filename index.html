@@ -3,7 +3,15 @@
         <title>Blue Voter Guide address autocompletion demo</title>
     </head>
     <body>
-        <label for="addr">Address:</label> <input type="text" id="addr" />
+        <label for="addr">Address:</label>
+        <input
+            size="50"
+            type="text"
+            id="addr"
+            autocomplete="off"
+            list="addr-suggestions"
+        />
+        <datalist id="addr-suggestions"> </datalist>
         <script type="text/javascript" src="./main.js"></script>
         <script>
             const addrField = document.getElementById("addr");
