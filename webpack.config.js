@@ -3,7 +3,7 @@ module.exports = {
   entry: [path.join(__dirname, "browser.js")],
   output: {
     path: path.resolve(__dirname, 'public'),
-    publicPath: '/',
+    publicPath: '/bvg-aws-address-autocomplete-demo/',
     filename: 'main.js'
   },
   resolve: {
