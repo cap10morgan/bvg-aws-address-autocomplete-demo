@@ -29,10 +29,13 @@
                     var options = [];
                     if (suggestions && suggestions.length > 0) {
                         options = suggestions.map((suggestion) => {
+                            if (suggestion === text) {
+                                return null;
+                            }
                             const option = document.createElement("option");
                             option.value = suggestion;
                             return option;
-                        });
+                        }).filter((o) => o !== null);
                     }
                     suggestionList.replaceChildren(...options);
                 });
