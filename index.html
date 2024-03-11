@@ -15,9 +15,25 @@
         <datalist id="addr-suggestions"> </datalist>
         <script type="text/javascript" src="./main.js"></script>
         <script>
+            const suggestionList = document.getElementById("addr-suggestions");
+            const loadSuggestions = (element) => {
+                // console.log("loading suggestions...");
+                const text = element.value;
+                getAddressAutocompleteSuggestions(text).then((suggestions) => {
+                    // console.log("Suggestions:");
+                    // console.dir(suggestions);
+                    if (suggestions && suggestions.length > 0) {
+                        suggestions.forEach((suggestion) => {
+                            const option = document.createElement("option");
+                            option.value = suggestion;
+                            suggestionList.appendChild(option);
+                        });
+                    }
+                });
+            };
             const addrField = document.getElementById("addr");
             addrField.addEventListener("input", (event) => {
-                getAddressAutocompleteSuggestions(event.target.value);
+                loadSuggestions(event.target);
             });
         </script>
     </body>
