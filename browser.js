@@ -17,6 +17,9 @@ const locationClient = new LocationClient({
 });
 
 const getAddressAutocompleteSuggestions = async (text) => {
+  if (text === '') {
+    return [];
+  }
   const params = {
     IndexName: "bvg-addr-autocomplete-demo",
     FilterCountries: ["USA"],
@@ -24,13 +27,16 @@ const getAddressAutocompleteSuggestions = async (text) => {
     Language: "en",
   };
   const command = new SearchPlaceIndexForSuggestionsCommand(params);
+  var results = [];
   try {
     const resp = await locationClient.send(command);
     console.log("Response:");
     console.dir(resp);
+    results = resp["Results"].map((place) => place["Text"]);
   } catch (error) {
     console.error(`Error: ${error}`);
   }
+  return results;
 };
 
 window.getAddressAutocompleteSuggestions = getAddressAutocompleteSuggestions;
