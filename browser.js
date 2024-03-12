@@ -16,13 +16,16 @@ const locationClient = new LocationClient({
   }),
 });
 
-const getAddressAutocompleteSuggestions = async (text) => {
+const getAddressAutocompleteSuggestions = async (text, bias) => {
   const params = {
     IndexName: "bvg-addr-autocomplete-demo",
     FilterCountries: ["USA"],
     Text: text,
     Language: "en",
   };
+  if (bias && bias.length === 2) {
+    params.BiasPosition = bias;
+  }
   const command = new SearchPlaceIndexForSuggestionsCommand(params);
   var results = [];
   try {

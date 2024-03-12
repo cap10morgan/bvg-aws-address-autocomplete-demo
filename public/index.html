@@ -4,15 +4,24 @@
         <title>Blue Voter Guide address autocompletion demo</title>
     </head>
     <body>
-        <label for="addr">Address:</label>
-        <input
-            size="50"
-            type="text"
-            id="addr"
-            autocomplete="off"
-            list="addr-suggestions"
-        />
-        <datalist id="addr-suggestions"> </datalist>
+        <div style="margin: 10pt">
+            <label for="addr">Address:</label>
+            <input
+                size="50"
+                type="text"
+                id="addr"
+                autocomplete="off"
+                list="addr-suggestions"
+            />
+            <datalist id="addr-suggestions"> </datalist>
+        </div>
+
+        <div style="margin: 10pt">
+            <label>Bias Position:</label>
+            <input size="20" type="text" id="bias-lat" placeholder="lat" />
+            <input size="20" type="text" id="bias-lng" placeholder="long" />
+        </div>
+
         <script type="text/javascript" src="./main.js"></script>
         <script>
             const suggestionList = document.getElementById("addr-suggestions");
@@ -23,7 +32,19 @@
                     suggestionList.replaceChildren();
                     return;
                 }
-                getAddressAutocompleteSuggestions(text).then((suggestions) => {
+                const biasLat = document.getElementById("bias-lat");
+                const biasLng = document.getElementById("bias-lng");
+                const bias = [];
+                if (biasLat.value !== '' && biasLng.value !== '') {
+                    const lat = parseInt(biasLat.value);
+                    const lng = parseInt(biasLng.value);
+                    if (!isNaN(lat) && !isNaN(lng)) {
+                        // yes Amazon really does want these in reverse order
+                        bias.push(parseInt(biasLng.value));
+                        bias.push(parseInt(biasLat.value));
+                    }
+                }
+                getAddressAutocompleteSuggestions(text, bias).then((suggestions) => {
                     // console.log("Suggestions:");
                     // console.dir(suggestions);
                     var options = [];
